@@ -1,0 +1,75 @@
+---
+title: "Using R"
+output: html_document
+---
+
+# Using R
+
+R is available on both Knot and Pod, including different versions of R. Note that the RStudio IDE is not available for use on the clusters.
+
+## Loading R
+
+To use R, enter one of the commands
+
+```
+# Knot
+R
+```
+or
+```
+# Pod
+load module R
+R
+```
+
+To exit, enter `q()`.
+
+## Versions
+
+On Pod, the avilable versions of R include
+
+```
+R/3.2.2
+R/3.4.4
+R/3.5.1-multith
+R/3.5.1
+```
+
+The default is the latest version. To load a specific version enter, for example, `load module R/3.4.4`.
+
+On Knot, the available version of R is 3.2.2.
+
+You may need to use a specific version of R that is not already installed on Pod or Knot. A different version of R can be installed inside your home directory, and your job file will need to point to this version of R.
+
+## Packages
+
+R packages can be installed using the command `install.packages("package")`. Packages should be stored inside your home folder. When using this command you may be prompted to select a CRAN mirror from which to download; select 140 (CA (2) - UCLA).
+
+## Example job files
+
+### Knot
+
+```
+#!/bin/bash
+#PBS -l nodes=1:ppn=1
+#PBS -m be
+#PBS -M user@ucsb.edu
+
+cd $PBS_O_WORKDIR
+
+Rscript script.R
+```
+
+### Pod
+
+```
+#!/bin/bash -l
+#SBATCH --nodes=1 --ntasks-per-node=1
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=user@ucsb.edu
+
+cd $SLURM_SUBMIT_DIR
+
+module load R
+Rscript script.R
+```

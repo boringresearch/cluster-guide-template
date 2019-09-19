@@ -1,0 +1,66 @@
+---
+title: "Using Stata"
+output: html_document
+---
+
+# Using Stata
+
+On both Pod and Knot, Stata/MP 15 is available with up to 24 cores. In order to use Stata, you will need to be added to the `econ` group (contact Fuzzy Rogers - fuz(at)ucsb.edu).
+
+## Loading Stata
+
+To use Stata, enter the command
+
+```
+/sw/stata/stata-mp
+```
+
+To exit, enter `exit`. Specific versions of Stata can be used by entering the `version #` command.
+
+To use the Stata GUI, connect to the servers via an XWindows environment and then enter the command
+
+```
+/sw/stata/xstata-mp
+```
+
+The GUI can be useful for viewing graphics, but will be relatively slow.
+
+## User-written packages
+
+User-written Stata packages can be installed by using the command `ssc install package` and should be stored inside your home directory. Point to the packages in .do files by using the command
+
+`sysdir set PLUS dir`
+
+where `dir` should be the path to the `ado/plus` directory inside your home folder.
+
+## Example job files
+
+Note that Stata has a `set processors #` command that should be included in .do files and match the requested resources in .job files (up to 24 processors).
+
+### Knot
+
+```
+#!/bin/bash 
+#PBS -l nodes=1:ppn=12
+#PBS -l walltime=2:00:00
+#PBS -V
+#PBS -m be
+#PBS -M user@ucsb.edu
+
+cd $PBS_O_WORKDIR/
+
+/sw/stata/stata-mp -b do script.do
+```
+
+### Pod
+
+```
+#!/bin/bash
+#SBATCH --nodes=1 --ntasks-per-node=24
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=user@ucsb.edu
+
+cd $SLURM_SUBMIT_DIR
+
+/sw/stata/stata-mp -b do script.do
+```
