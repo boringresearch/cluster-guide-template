@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 Using R | UCSB Server Cluster User Guide</title>
   <meta name="description" content="A guide to the UCSB server clusters" />
-  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 Using R | UCSB Server Cluster User Guide" />
   <meta property="og:type" content="book" />
@@ -23,15 +23,15 @@
 
 
 
-<meta name="date" content="2019-09-18" />
+<meta name="date" content="2019-10-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
-<link rel="prev" href="submitting-jobs.html">
-<link rel="next" href="using-stata.html">
+<link rel="prev" href="submitting-jobs.html"/>
+<link rel="next" href="using-stata.html"/>
 <script src="assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -39,6 +39,9 @@
 <link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -117,10 +120,10 @@
             <section class="normal" id="section-">
 <div id="using-r" class="section level1">
 <h1><span class="header-section-number">5</span> Using R</h1>
-<p>R is available on both Knot and Pod, including different versions of R. Note that the RStudio IDE is not available for use on the clusters.</p>
+<p>R is available on both Knot and Pod, including different versions of R.</p>
 <div id="loading-r" class="section level2">
 <h2><span class="header-section-number">5.1</span> Loading R</h2>
-<p>To use R, enter one of the commands</p>
+<p>To load R, enter one of the commands</p>
 <pre><code># Knot
 R</code></pre>
 <p>or</p>
@@ -128,21 +131,23 @@ R</code></pre>
 load module R
 R</code></pre>
 <p>To exit, enter <code>q()</code>.</p>
+<p>Note that the RStudio IDE is not available for use on the clusters.</p>
+<p><em>Remember: Most analyses should be performed on compute nodes by submitting jobs. The login node should only be used for simple analyses, testing, or debugging.</em></p>
 </div>
 <div id="versions" class="section level2">
 <h2><span class="header-section-number">5.2</span> Versions</h2>
-<p>On Pod, the avilable versions of R include</p>
+<p>On Pod, the available versions of R include</p>
 <pre><code>R/3.2.2
 R/3.4.4
 R/3.5.1-multith
 R/3.5.1</code></pre>
-<p>The default is the latest version. To load a specific version enter, for example, <code>load module R/3.4.4</code>.</p>
+<p>The default is the latest version. To load a specific version, for example, enter <code>load module R/3.4.4</code>.</p>
 <p>On Knot, the available version of R is 3.2.2.</p>
-<p>You may need to use a specific version of R that is not already installed on Pod or Knot. A different version of R can be installed inside your home directory, and your job file will need to point to this version of R.</p>
+<p>A different version of R can be installed inside your home directory. For more info see <a href="http://csc.cnsi.ucsb.edu/docs/using-r-knot-braid-and-pod" class="uri">http://csc.cnsi.ucsb.edu/docs/using-r-knot-braid-and-pod</a>.</p>
 </div>
 <div id="packages" class="section level2">
 <h2><span class="header-section-number">5.3</span> Packages</h2>
-<p>R packages can be installed using the command <code>install.packages(&quot;package&quot;)</code>. Packages should be stored inside your home folder. When using this command you may be prompted to select a CRAN mirror from which to download; select 140 (CA (2) - UCLA).</p>
+<p>To see a list of already installed R packages and their versions, use the R command <code>installed.packages()</code>. Additional packages can be installed using the R command <code>install.packages(&quot;package&quot;)</code> and should be stored inside your home folder. When using this command you may be prompted to select a CRAN mirror from which to download; select a USA (CA) mirror with an HTTPS connection for a fast and secure download. R should automatically add the home-based library to <code>.libPaths()</code> (enter to confirm), which allows it to detect packages installed inside your home folder.</p>
 </div>
 <div id="example-job-files" class="section level2">
 <h2><span class="header-section-number">5.4</span> Example job files</h2>
@@ -183,11 +188,13 @@ Rscript script.R</code></pre>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>
 <script src="assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

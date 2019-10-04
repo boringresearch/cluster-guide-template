@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6 Using Stata | UCSB Server Cluster User Guide</title>
   <meta name="description" content="A guide to the UCSB server clusters" />
-  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6 Using Stata | UCSB Server Cluster User Guide" />
   <meta property="og:type" content="book" />
@@ -23,15 +23,15 @@
 
 
 
-<meta name="date" content="2019-09-18" />
+<meta name="date" content="2019-10-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
-<link rel="prev" href="using-r.html">
-<link rel="next" href="using-software-containers.html">
+<link rel="prev" href="using-r.html"/>
+<link rel="next" href="using-software-containers.html"/>
 <script src="assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -39,6 +39,9 @@
 <link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -120,22 +123,21 @@
 <p>On both Pod and Knot, Stata/MP 15 is available with up to 24 cores. In order to use Stata, you will need to be added to the <code>econ</code> group (contact Fuzzy Rogers - fuz(at)ucsb.edu).</p>
 <div id="loading-stata" class="section level2">
 <h2><span class="header-section-number">6.1</span> Loading Stata</h2>
-<p>To use Stata, enter the command</p>
+<p>To load Stata, enter the command</p>
 <pre><code>/sw/stata/stata-mp</code></pre>
 <p>To exit, enter <code>exit</code>. Specific versions of Stata can be used by entering the <code>version #</code> command.</p>
-<p>To use the Stata GUI, connect to the servers via an XWindows environment and then enter the command</p>
+<p>To load the Stata GUI, connect to a cluster via an XWindows environment and then enter the command</p>
 <pre><code>/sw/stata/xstata-mp</code></pre>
 <p>The GUI can be useful for viewing graphics, but will be relatively slow.</p>
+<p><em>Remember: Most analyses should be performed on compute nodes by submitting jobs. The login node should only be used for simple analyses, testing, or debugging.</em></p>
 </div>
 <div id="user-written-packages" class="section level2">
 <h2><span class="header-section-number">6.2</span> User-written packages</h2>
-<p>User-written Stata packages can be installed by using the command <code>ssc install package</code> and should be stored inside your home directory. Point to the packages in .do files by using the command</p>
-<p><code>sysdir set PLUS dir</code></p>
-<p>where <code>dir</code> should be the path to the <code>ado/plus</code> directory inside your home folder.</p>
+<p>User-written Stata packages can be installed by using the Stata command <code>ssc install package</code> and should be stored inside your home directory. Point to the packages in do-files by using the Stata command <code>sysdir set PLUS dir</code> where <code>dir</code> should be the path to the <code>ado/plus</code> directory inside your home folder.</p>
 </div>
 <div id="example-job-files-1" class="section level2">
 <h2><span class="header-section-number">6.3</span> Example job files</h2>
-<p>Note that Stata has a <code>set processors #</code> command that should be included in .do files and match the requested resources in .job files (up to 24 processors).</p>
+<p>Note that Stata has a <code>set processors #</code> command that should be included in do-files and match the requested resources in job files (up to 24 processors).</p>
 <div id="knot-2" class="section level3">
 <h3><span class="header-section-number">6.3.1</span> Knot</h3>
 <pre><code>#!/bin/bash 
@@ -174,11 +176,13 @@ cd $SLURM_SUBMIT_DIR
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>
 <script src="assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

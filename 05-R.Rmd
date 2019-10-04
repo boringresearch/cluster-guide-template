@@ -5,11 +5,11 @@ output: html_document
 
 # Using R
 
-R is available on both Knot and Pod, including different versions of R. Note that the RStudio IDE is not available for use on the clusters.
+R is available on both Knot and Pod, including different versions of R.
 
 ## Loading R
 
-To use R, enter one of the commands
+To load R, enter one of the commands
 
 ```
 # Knot
@@ -24,9 +24,13 @@ R
 
 To exit, enter `q()`.
 
+Note that the RStudio IDE is not available for use on the clusters.
+
+*Remember: Most analyses should be performed on compute nodes by submitting jobs. The login node should only be used for simple analyses, testing, or debugging.*
+
 ## Versions
 
-On Pod, the avilable versions of R include
+On Pod, the available versions of R include
 
 ```
 R/3.2.2
@@ -35,15 +39,15 @@ R/3.5.1-multith
 R/3.5.1
 ```
 
-The default is the latest version. To load a specific version enter, for example, `load module R/3.4.4`.
+The default is the latest version. To load a specific version, for example, enter `load module R/3.4.4`.
 
 On Knot, the available version of R is 3.2.2.
 
-You may need to use a specific version of R that is not already installed on Pod or Knot. A different version of R can be installed inside your home directory, and your job file will need to point to this version of R.
+A different version of R can be installed inside your home directory. For more info see <http://csc.cnsi.ucsb.edu/docs/using-r-knot-braid-and-pod>.
 
 ## Packages
 
-R packages can be installed using the command `install.packages("package")`. Packages should be stored inside your home folder. When using this command you may be prompted to select a CRAN mirror from which to download; select 140 (CA (2) - UCLA).
+To see a list of already installed R packages and their versions, use the R command `installed.packages()`. Additional packages can be installed using the R command `install.packages("package")` and should be stored inside your home folder. When using this command you may be prompted to select a CRAN mirror from which to download; select a USA (CA) mirror with an HTTPS connection for a fast and secure download. R should automatically add the home-based library to `.libPaths()` (enter to confirm), which allows it to detect packages installed inside your home folder.
 
 ## Example job files
 
