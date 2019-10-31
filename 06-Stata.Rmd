@@ -15,7 +15,7 @@ To load Stata, enter the command
 /sw/stata/stata-mp
 ```
 
-To exit, enter `exit`. Specific versions of Stata can be used by entering the `version #` command.
+To exit, enter `exit`. Specific versions of Stata can be used by entering the `version #` command within Stata.
 
 To load the Stata GUI, connect to a cluster via an XWindows environment and then enter the command
 
@@ -33,16 +33,20 @@ User-written Stata packages can be installed by using the Stata command `ssc ins
 
 ## Example job files
 
-Note that Stata has a `set processors #` command that should be included in do-files and match the requested resources in job files (up to 24 processors).
+Note that Stata has a `set processors #` command that should be included in do-files and match the requested resources in job files (up to 24 processors). Similarly, there is a `set max_memory #` command that can also be included.
+
+Also note that these job files run Stata in batch mode (`-b`), which automatically creates a plain-text log file in the current working directory. As a result, log commands do not need to be included in do-files.
+
+To change Stata's temporary files directory, include the command `export STATATMP=dir` where `dir` is the directory of your choice, placed before running Stata.
 
 ### Knot
 
 ```
-#!/bin/bash 
+#!/bin/bash
 #PBS -l nodes=1:ppn=12
 #PBS -l walltime=2:00:00
 #PBS -V
-#PBS -m be
+#PBS -m abe
 #PBS -M user@ucsb.edu
 
 cd $PBS_O_WORKDIR/
@@ -55,6 +59,7 @@ cd $PBS_O_WORKDIR/
 ```
 #!/bin/bash
 #SBATCH --nodes=1 --ntasks-per-node=24
+#SBATCH --time=2:00:00
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=user@ucsb.edu
 

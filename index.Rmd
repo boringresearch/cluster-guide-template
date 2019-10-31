@@ -1,5 +1,5 @@
 ---
-title: "UCSB Server Cluster User Guide"
+title: "User Guide for the UCSB Server Clusters"
 author: ""
 date: "`r Sys.Date()`"
 description: "A guide to the UCSB server clusters"

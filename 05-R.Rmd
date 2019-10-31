@@ -47,7 +47,7 @@ A different version of R can be installed inside your home directory. For more i
 
 ## Packages
 
-To see a list of already installed R packages and their versions, use the R command `installed.packages()`. Additional packages can be installed using the R command `install.packages("package")` and should be stored inside your home folder. When using this command you may be prompted to select a CRAN mirror from which to download; select a USA (CA) mirror with an HTTPS connection for a fast and secure download. R should automatically add the home-based library to `.libPaths()` (enter to confirm), which allows it to detect packages installed inside your home folder.
+Packages can be installed using the R command `install.packages("package")` and should be stored inside your home folder. When using this command you may be prompted to select a CRAN mirror from which to download; select a USA (CA) mirror with an HTTPS connection for a fast and secure download. R should automatically add the home-based package library to `.libPaths()` (enter to confirm) and set it as default.
 
 ## Example job files
 
@@ -56,12 +56,13 @@ To see a list of already installed R packages and their versions, use the R comm
 ```
 #!/bin/bash
 #PBS -l nodes=1:ppn=1
-#PBS -m be
+#PBS -l walltime=2:00:00
+#PBS -m abe
 #PBS -M user@ucsb.edu
 
 cd $PBS_O_WORKDIR
 
-Rscript script.R
+Rscript --vanilla script.R
 ```
 
 ### Pod
@@ -69,11 +70,12 @@ Rscript script.R
 ```
 #!/bin/bash -l
 #SBATCH --nodes=1 --ntasks-per-node=1
+#SBATCH --time=2:00:00
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=user@ucsb.edu
 
 cd $SLURM_SUBMIT_DIR
 
 module load R
-Rscript script.R
+Rscript --vanilla script.R
 ```

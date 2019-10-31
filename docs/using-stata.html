@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6 Using Stata | UCSB Server Cluster User Guide</title>
+  <title>6 Using Stata | User Guide for the UCSB Server Clusters</title>
   <meta name="description" content="A guide to the UCSB server clusters" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6 Using Stata | UCSB Server Cluster User Guide" />
+  <meta property="og:title" content="6 Using Stata | User Guide for the UCSB Server Clusters" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://emlab-ucsb.github.io/cluster-guide/" />
   
@@ -16,14 +16,14 @@
   <meta name="github-repo" content="emlab-ucsb/cluster-guide" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6 Using Stata | UCSB Server Cluster User Guide" />
+  <meta name="twitter:title" content="6 Using Stata | User Guide for the UCSB Server Clusters" />
   
   <meta name="twitter:description" content="A guide to the UCSB server clusters" />
   
 
 
 
-<meta name="date" content="2019-10-03" />
+<meta name="date" content="2019-10-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -110,7 +110,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">UCSB Server Cluster User Guide</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">User Guide for the UCSB Server Clusters</a>
           </h1>
         </div>
 
@@ -125,7 +125,7 @@
 <h2><span class="header-section-number">6.1</span> Loading Stata</h2>
 <p>To load Stata, enter the command</p>
 <pre><code>/sw/stata/stata-mp</code></pre>
-<p>To exit, enter <code>exit</code>. Specific versions of Stata can be used by entering the <code>version #</code> command.</p>
+<p>To exit, enter <code>exit</code>. Specific versions of Stata can be used by entering the <code>version #</code> command within Stata.</p>
 <p>To load the Stata GUI, connect to a cluster via an XWindows environment and then enter the command</p>
 <pre><code>/sw/stata/xstata-mp</code></pre>
 <p>The GUI can be useful for viewing graphics, but will be relatively slow.</p>
@@ -137,14 +137,16 @@
 </div>
 <div id="example-job-files-1" class="section level2">
 <h2><span class="header-section-number">6.3</span> Example job files</h2>
-<p>Note that Stata has a <code>set processors #</code> command that should be included in do-files and match the requested resources in job files (up to 24 processors).</p>
+<p>Note that Stata has a <code>set processors #</code> command that should be included in do-files and match the requested resources in job files (up to 24 processors). Similarly, there is a <code>set max_memory #</code> command that can also be included.</p>
+<p>Also note that these job files run Stata in batch mode (<code>-b</code>), which automatically creates a plain-text log file in the current working directory. As a result, log commands do not need to be included in do-files.</p>
+<p>To change Stata’s temporary files directory, include the command <code>export STATATMP=dir</code> where <code>dir</code> is the directory of your choice, placed before running Stata.</p>
 <div id="knot-2" class="section level3">
 <h3><span class="header-section-number">6.3.1</span> Knot</h3>
-<pre><code>#!/bin/bash 
+<pre><code>#!/bin/bash
 #PBS -l nodes=1:ppn=12
 #PBS -l walltime=2:00:00
 #PBS -V
-#PBS -m be
+#PBS -m abe
 #PBS -M user@ucsb.edu
 
 cd $PBS_O_WORKDIR/
@@ -155,6 +157,7 @@ cd $PBS_O_WORKDIR/
 <h3><span class="header-section-number">6.3.2</span> Pod</h3>
 <pre><code>#!/bin/bash
 #SBATCH --nodes=1 --ntasks-per-node=24
+#SBATCH --time=2:00:00
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=user@ucsb.edu
 

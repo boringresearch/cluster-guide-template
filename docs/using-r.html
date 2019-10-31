@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 Using R | UCSB Server Cluster User Guide</title>
+  <title>5 Using R | User Guide for the UCSB Server Clusters</title>
   <meta name="description" content="A guide to the UCSB server clusters" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 Using R | UCSB Server Cluster User Guide" />
+  <meta property="og:title" content="5 Using R | User Guide for the UCSB Server Clusters" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://emlab-ucsb.github.io/cluster-guide/" />
   
@@ -16,14 +16,14 @@
   <meta name="github-repo" content="emlab-ucsb/cluster-guide" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 Using R | UCSB Server Cluster User Guide" />
+  <meta name="twitter:title" content="5 Using R | User Guide for the UCSB Server Clusters" />
   
   <meta name="twitter:description" content="A guide to the UCSB server clusters" />
   
 
 
 
-<meta name="date" content="2019-10-03" />
+<meta name="date" content="2019-10-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -110,7 +110,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">UCSB Server Cluster User Guide</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">User Guide for the UCSB Server Clusters</a>
           </h1>
         </div>
 
@@ -147,7 +147,7 @@ R/3.5.1</code></pre>
 </div>
 <div id="packages" class="section level2">
 <h2><span class="header-section-number">5.3</span> Packages</h2>
-<p>To see a list of already installed R packages and their versions, use the R command <code>installed.packages()</code>. Additional packages can be installed using the R command <code>install.packages(&quot;package&quot;)</code> and should be stored inside your home folder. When using this command you may be prompted to select a CRAN mirror from which to download; select a USA (CA) mirror with an HTTPS connection for a fast and secure download. R should automatically add the home-based library to <code>.libPaths()</code> (enter to confirm), which allows it to detect packages installed inside your home folder.</p>
+<p>Packages can be installed using the R command <code>install.packages(&quot;package&quot;)</code> and should be stored inside your home folder. When using this command you may be prompted to select a CRAN mirror from which to download; select a USA (CA) mirror with an HTTPS connection for a fast and secure download. R should automatically add the home-based package library to <code>.libPaths()</code> (enter to confirm) and set it as default.</p>
 </div>
 <div id="example-job-files" class="section level2">
 <h2><span class="header-section-number">5.4</span> Example job files</h2>
@@ -155,24 +155,26 @@ R/3.5.1</code></pre>
 <h3><span class="header-section-number">5.4.1</span> Knot</h3>
 <pre><code>#!/bin/bash
 #PBS -l nodes=1:ppn=1
-#PBS -m be
+#PBS -l walltime=2:00:00
+#PBS -m abe
 #PBS -M user@ucsb.edu
 
 cd $PBS_O_WORKDIR
 
-Rscript script.R</code></pre>
+Rscript --vanilla script.R</code></pre>
 </div>
 <div id="pod-1" class="section level3">
 <h3><span class="header-section-number">5.4.2</span> Pod</h3>
 <pre><code>#!/bin/bash -l
 #SBATCH --nodes=1 --ntasks-per-node=1
+#SBATCH --time=2:00:00
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=user@ucsb.edu
 
 cd $SLURM_SUBMIT_DIR
 
 module load R
-Rscript script.R</code></pre>
+Rscript --vanilla script.R</code></pre>
 
 </div>
 </div>
