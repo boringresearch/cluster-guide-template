@@ -1,6 +1,6 @@
 # Cluster Guide
 
-A user guide for the UCSB server clusters.
+A user guide for the UCSB server clusters:
 
 <https://emlab-ucsb.github.io/cluster-guide/>
 
@@ -11,4 +11,4 @@ The website is built using the `bookdown` package for R. After pulling the lates
 
 `bookdown::render_book(input = "index.Rmd")`
 
-Then commit the changes and push to the repo. The GitHub website will automatically update with the new changes.
+To produce a clean build of the website, simply delete the 'docs' folder before rendering, which is where generated files are stored. Once rendered, then commit the changes and push to the repo. The GitHub website will automatically update with the new changes.
