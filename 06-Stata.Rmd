@@ -7,37 +7,39 @@ output: html_document
 
 On both Pod and Knot, Stata/MP 15 is available with up to 24 cores. In order to use Stata, you will need to be added to the `econ` group (contact Fuzzy Rogers - fuz(at)ucsb.edu).
 
+Note that only two Stata jobs can run concurrently on a cluster, so if you get an inexplicable error after submitting a job---such as SLURM ExitCode 127---then this is likely the reason. You will simply have to wait until one of the running jobs is finished and then re-submit your job.
+
 ## Loading Stata
 
-To load Stata, enter the command
+To load Stata on either Knot or Pod for interactive use, enter the command
 
 ```
-/sw/stata/stata-mp
+$ /sw/stata/stata-mp
 ```
 
-To exit, enter `exit`. Specific versions of Stata can be used by entering the `version #` command within Stata.
+To exit Stata, use the command `exit`. Specific versions of Stata can be used by entering the `version <#>` command within Stata.
 
 To load the Stata GUI, connect to a cluster via an XWindows environment and then enter the command
 
 ```
-/sw/stata/xstata-mp
+$ /sw/stata/xstata-mp
 ```
 
 The GUI can be useful for viewing graphics, but will be relatively slow.
 
-*Remember: Most analyses should be performed on compute nodes by submitting jobs. The login node should only be used for simple analyses, testing, or debugging.*
+*Remember: Most analyses should be performed on compute nodes by submitting batch jobs. The login node should only be used for simple analyses, testing, or debugging.*
 
-## User-written packages
+## Packages
 
-User-written Stata packages can be installed by using the Stata command `ssc install package` and should be stored inside your home directory. Point to the packages in do-files by using the Stata command `sysdir set PLUS dir` where `dir` should be the path to the `ado/plus` directory inside your home folder.
+User-written Stata packages can be installed using one of the Stata commands `net install <package>` or `ssc install <package>`, depending on the source. These packages should be stored inside your home directory. Point to the packages in do-files by using the Stata command `sysdir set PLUS dir` where `dir` should be the path to the `ado/plus` directory inside your home folder. For personal ado-files and packages that you have written, point to them in do-files by using the Stata command `sysdir set PERSONAL dir` where `dir` should be the path to the `ado/personal` directory inside your home folder.
 
 ## Example job files
 
-Note that Stata has a `set processors #` command that should be included in do-files and match the requested resources in job files (up to 24 processors). Similarly, there is a `set max_memory #` command that can also be included.
+These job files run Stata in batch mode (`-b`), which automatically creates a plain-text log file in the current working directory. As a result, log commands do not necessarily need to be included in do-files.
 
-Also note that these job files run Stata in batch mode (`-b`), which automatically creates a plain-text log file in the current working directory. As a result, log commands do not need to be included in do-files.
+To change Stata's temporary files directory, in the job file include the command `export STATATMP=dir` where `dir` is the directory of your choice.
 
-To change Stata's temporary files directory, include the command `export STATATMP=dir` where `dir` is the directory of your choice, placed before running Stata.
+Note that Stata has a `set processors <#>` command that should be included in do-files and match the requested resources in job files (up to 24 processors). Similarly, there is a `set max_memory <#>` command that should also be included (see Stata on Linux issue [here](https://www.stata.com/manuals/dmemory.pdf#dmemoryRemarksandexamplesSeriousbuginLinuxOS)).
 
 ### Knot
 
@@ -64,6 +66,8 @@ cd $PBS_O_WORKDIR/
 #SBATCH --mail-user=user@ucsb.edu
 
 cd $SLURM_SUBMIT_DIR
+
+export STATATMP=/home/user
 
 /sw/stata/stata-mp -b do script.do
 ```
