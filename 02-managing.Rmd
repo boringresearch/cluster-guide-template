@@ -1,11 +1,17 @@
 ---
-title: "Using the clusters"
+title: "Managing files"
 output: html_document
 ---
 
 # Managing files
 
-Both Pod and Knot allow for 4 TB of file storage per user and more can be requested if needed. File management on the server clusters involves commonly used Linux commands to navigate and modify files and folders. The generic setup is `command [options] <arguments>`. Most of the following commands have multiple options that are not covered here. For detailed documentation enter `man command`. Additionally, for a broader introduction to Linux commands see the Software Carpentry's lessons at <http://swcarpentry.github.io/shell-novice/>.
+Both Pod and Knot allow for 4 TB of file storage per user and more can be requested if needed. File management on the server clusters involves commonly used Linux commands to navigate and modify files and folders. The generic setup is
+
+```
+$ command [options] <arguments>
+```
+
+Most of the following commands have multiple options that are not covered here. For detailed documentation enter the command `man <command>`. Additionally, for a broader introduction to Linux commands see the Software Carpentry's lessons at <http://swcarpentry.github.io/shell-novice/>.
 
 ## Navigation
 
@@ -44,9 +50,9 @@ Both Pod and Knot allow for 4 TB of file storage per user and more can be reques
 
 `head -1 file.csv` - print column names if in first row of text file  
 
-`cut -d , -f 2,4-6 file.csv | less` - view specific columns of .csv file by number position (e.g., 2,4-6)
+`cut -d , -f 2,4-6 file.csv | less` - view specific columns of CSV file by number position (e.g., 2,4-6)
 
-To view .csv files with pretty output, enter  
+To view CSV files with pretty output, enter  
 `cat file.csv | sed -e 's/,,/, ,/g' | column -s, -t | less -#5 -N -S`  
 Note: This may not work well for all files. Use arrow keys to navigate and press `q` to exit.
 
@@ -54,8 +60,8 @@ Note: This may not work well for all files. Use arrow keys to navigate and press
 `nano` - create new text file using nano text editor  
 `nano file.txt` - view and edit text file using nano text editor
 
-`zip -r file.zip file1 folder1` - create compressed .zip file with recursion  
-`unzip file.zip` - extract .zip file into working directory
+`zip -r file.zip file1 folder1` - create compressed ZIP file with recursion  
+`unzip file.zip` - extract ZIP file into working directory
 
 ## Permissions
 
@@ -90,6 +96,9 @@ To change permissions enter
 `Ctrl+E` - move to end of line  
 `Ctrl+U` - clear line from cursor  
 `Ctrl+C` - cancel command  
+`~` - home directory  
+`.` - current directory  
+`..` - one directory up  
 `*` - wildcard completion  
 `Tab key` - autocompletion  
 `Up and down arrow keys` - cycle through command history
