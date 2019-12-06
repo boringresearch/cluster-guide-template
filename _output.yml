@@ -8,6 +8,10 @@ bookdown::gitbook:
       scroll_highlight: yes
     toolbar:
       position: static
-    sharing: null
+    sharing:
+      github: yes
+      facebook: no
+      twitter: no
+      all: no
     search: yes
 ---

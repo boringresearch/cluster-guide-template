@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2019-10-30" />
+<meta name="date" content="2019-12-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -78,6 +78,7 @@
 <li class="chapter" data-level="3" data-path="transferring-files.html"><a href="transferring-files.html"><i class="fa fa-check"></i><b>3</b> Transferring files</a><ul>
 <li class="chapter" data-level="3.1" data-path="transferring-files.html"><a href="transferring-files.html#using-scp-to-transfer-files"><i class="fa fa-check"></i><b>3.1</b> Using scp to transfer files</a></li>
 <li class="chapter" data-level="3.2" data-path="transferring-files.html"><a href="transferring-files.html#using-rsync-to-transfer-files"><i class="fa fa-check"></i><b>3.2</b> Using rsync to transfer files</a></li>
+<li class="chapter" data-level="3.3" data-path="transferring-files.html"><a href="transferring-files.html#using-rclone-to-transfer-files"><i class="fa fa-check"></i><b>3.3</b> Using rclone to transfer files</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="submitting-jobs.html"><a href="submitting-jobs.html"><i class="fa fa-check"></i><b>4</b> Submitting jobs</a><ul>
 <li class="chapter" data-level="4.1" data-path="submitting-jobs.html"><a href="submitting-jobs.html#knot"><i class="fa fa-check"></i><b>4.1</b> Knot</a></li>
@@ -94,7 +95,7 @@
 </ul></li>
 <li class="chapter" data-level="6" data-path="using-stata.html"><a href="using-stata.html"><i class="fa fa-check"></i><b>6</b> Using Stata</a><ul>
 <li class="chapter" data-level="6.1" data-path="using-stata.html"><a href="using-stata.html#loading-stata"><i class="fa fa-check"></i><b>6.1</b> Loading Stata</a></li>
-<li class="chapter" data-level="6.2" data-path="using-stata.html"><a href="using-stata.html#user-written-packages"><i class="fa fa-check"></i><b>6.2</b> User-written packages</a></li>
+<li class="chapter" data-level="6.2" data-path="using-stata.html"><a href="using-stata.html#packages-1"><i class="fa fa-check"></i><b>6.2</b> Packages</a></li>
 <li class="chapter" data-level="6.3" data-path="using-stata.html"><a href="using-stata.html#example-job-files-1"><i class="fa fa-check"></i><b>6.3</b> Example job files</a><ul>
 <li class="chapter" data-level="6.3.1" data-path="using-stata.html"><a href="using-stata.html#knot-2"><i class="fa fa-check"></i><b>6.3.1</b> Knot</a></li>
 <li class="chapter" data-level="6.3.2" data-path="using-stata.html"><a href="using-stata.html#pod-2"><i class="fa fa-check"></i><b>6.3.2</b> Pod</a></li>
@@ -123,13 +124,15 @@
 <p>To access the server clusters, you must first request a user account. The request form can be found at <a href="http://csc.cnsi.ucsb.edu/acct" class="uri">http://csc.cnsi.ucsb.edu/acct</a>. The job type selection should probably be Serial or Parallel, but select the option that best describes your needs. In the job type description you should describe any relevant information related to user groups, access to specific folders, or special software usage. If you need Stata, then you should request to be added to the <code>econ</code> group, which holds the license to use Stata. The system to be used should be Pod and Knot, which are the main Linux-based server clusters. Pod is the newest cluster and offers greater capabilities, but Knot is still adequate for most analysis needs and typically has less active users (i.e., a shorter job queue).</p>
 <div id="on-campus" class="section level2">
 <h2><span class="header-section-number">1.1</span> On campus</h2>
-<p>Once your account has been created, the clusters can be accessed on campus via a terminal emulator using the <code>ssh</code> command or via a GUI SSH app, such as <a href="https://wiki.x2go.org/doku.php">X2Go</a>. On macOS or Linux the default terminal apps can be used. On Windows the <a href="https://www.putty.org/">PuTTY</a> or X2Go apps can be used. Once a terminal is started, connect to a cluster by entering one of the commands</p>
-<pre><code>ssh user@knot.cnsi.ucsb.edu</code></pre>
-<p>or</p>
-<pre><code>ssh user@pod.cnsi.ucsb.edu</code></pre>
+<p>Once your account has been created, the clusters can be accessed on campus via a terminal emulator using the <code>ssh</code> command or via a GUI SSH app, such as <a href="https://wiki.x2go.org/doku.php">X2Go</a>. On macOS or Linux the default terminal apps can be used. On Windows the <a href="https://www.putty.org/">PuTTY</a> or X2Go apps can be used. Once a terminal is started, connect to Knot by entering the command</p>
+<pre><code>$ ssh user@knot.cnsi.ucsb.edu</code></pre>
+<p>or connect to Pod by entering the command</p>
+<pre><code>$ ssh user@pod.cnsi.ucsb.edu</code></pre>
 <p>where <code>user</code> is your server username. You will then be prompted for your password. SSH keys can also be set up to skip password entry.</p>
-<p>Once connected, you will interact with the Linux server using the command line interface. The default working directory is your home folder <code>/home/user</code>. Note that this is the login node, but all analyses should be run on compute nodes. These analyses should be submitted as jobs (more <a href="submitting-jobs.html#submitting-jobs">here</a>) to the queue, which allocates compute nodes among users.</p>
-<p>To disconnect from the cluster, enter <code>exit</code>.</p>
+<p>To use GUI applications on the server, a slightly different process is needed in order to enter an XWindows environment. On macOS, <a href="https://www.xquartz.org/">XQuartz</a> must be installed. On Windows, use the X2Go app to connect to the server. More info on X2Go can be found at <a href="http://csc.cnsi.ucsb.edu/docs/using-x2go-gui-login-knot-or-pod" class="uri">http://csc.cnsi.ucsb.edu/docs/using-x2go-gui-login-knot-or-pod</a>. To use GUIs, add the <code>-X</code> option to the <code>ssh</code> command, such as</p>
+<pre><code>$ ssh -X user@pod.cnsi.ucsb.edu</code></pre>
+<p>Once connected, you will interact with the Linux server using the command line interface. The default working directory is your home folder <code>/home/user</code>. Note that this is the login node, but all analyses should be run on compute nodes. These analyses should be submitted as jobs to the queue (more about this <a href="submitting-jobs.html#submitting-jobs">later</a>), which allocates compute nodes among users.</p>
+<p>To disconnect from the cluster, use the command <code>exit</code>.</p>
 </div>
 <div id="off-campus" class="section level2">
 <h2><span class="header-section-number">1.2</span> Off campus</h2>
@@ -158,7 +161,17 @@
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": null,
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": false
+},
 "fontsettings": {
 "theme": "white",
 "family": "sans",
@@ -185,6 +198,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
