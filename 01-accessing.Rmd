@@ -9,21 +9,29 @@ To access the server clusters, you must first request a user account. The reques
 
 ## On campus
 
-Once your account has been created, the clusters can be accessed on campus via a terminal emulator using the `ssh` command or via a GUI SSH app, such as [X2Go](https://wiki.x2go.org/doku.php). On macOS or Linux the default terminal apps can be used. On Windows the [PuTTY](https://www.putty.org/) or X2Go apps can be used. Once a terminal is started, connect to a cluster by entering one of the commands
+Once your account has been created, the clusters can be accessed on campus via a terminal emulator using the `ssh` command or via a GUI SSH app, such as [X2Go](https://wiki.x2go.org/doku.php). On macOS or Linux the default terminal apps can be used. On Windows the [PuTTY](https://www.putty.org/) or X2Go apps can be used. Once a terminal is started, connect to Knot by entering the command
 
 ```
-ssh user@knot.cnsi.ucsb.edu
+$ ssh user@knot.cnsi.ucsb.edu
 ```
-or
+
+or connect to Pod by entering the command
+
 ```
-ssh user@pod.cnsi.ucsb.edu
+$ ssh user@pod.cnsi.ucsb.edu
 ```
 
 where `user` is your server username. You will then be prompted for your password. SSH keys can also be set up to skip password entry.
 
-Once connected, you will interact with the Linux server using the command line interface. The default working directory is your home folder `/home/user`. Note that this is the login node, but all analyses should be run on compute nodes. These analyses should be submitted as jobs (more [here](#submitting-jobs)) to the queue, which allocates compute nodes among users.
+To use GUI applications on the server, a slightly different process is needed in order to enter an XWindows environment. On macOS, [XQuartz](https://www.xquartz.org/) must be installed. On Windows, use the X2Go app to connect to the server. More info on X2Go can be found at <http://csc.cnsi.ucsb.edu/docs/using-x2go-gui-login-knot-or-pod>. To use GUIs, add the `-X` option to the `ssh` command, such as
 
-To disconnect from the cluster, enter `exit`.
+```
+$ ssh -X user@pod.cnsi.ucsb.edu
+```
+
+Once connected, you will interact with the Linux server using the command line interface. The default working directory is your home folder `/home/user`. Note that this is the login node, but all analyses should be run on compute nodes. These analyses should be submitted as jobs to the queue (more about this [later](#submitting-jobs)), which allocates compute nodes among users.
+
+To disconnect from the cluster, use the command `exit`.
 
 ## Off campus
 
