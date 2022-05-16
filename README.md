@@ -2,7 +2,7 @@
 
 A user guide for the UCSB server clusters:
 
-<https://emlab-ucsb.github.io/cluster-guide/>
+<https://gaelic-algorithmic-research-group.github.io/cluster-guide/>
 
 
 ## Contributing
