@@ -20,13 +20,13 @@ $ scp [options] <source> <destination>
 To copy a single file from a local computer to the Pod cluster, the scp command is
 
 ```
-$ scp /path/to/file.txt user@pod.cnsi.ucsb.edu:/home/user
+$ scp /path/to/file.txt user@eddie.ecdf.ed.ac.uk:/home/user
 ```
 
 To copy an entire directory from a local computer to the Pod server cluster, the typical scp command is
 
 ```
-$ scp -r /path/to/project user@pod.cnsi.ucsb.edu:/home/user
+$ scp -r /path/to/project user@eddie.ecdf.ed.ac.uk:/home/user
 ```
 
 where the `-r` option indicates that files should be transferred recursively, such as subdirectories.
@@ -44,7 +44,7 @@ $ rsync [options] <source> <destination>
 To transfer an entire directory from a local computer to the Pod cluster, a typical rsync command with commonly used options is
 
 ```
-$ rsync -avzP -e ssh /home/user/project/ user@pod.cnsi.ucsb.edu:/home/user/project
+$ rsync -avzP -e ssh /home/user/project/ user@eddie.ecdf.ed.ac.uk:/home/user/project
 ```
 
 This example represents a push transfer. A pull transfer could also be completed by simply switching the source and destination. When transferring entire directories, a forward slash on the source matters but never for the destination. In this case, the 'project' folder has a forward slash and all its contents will be replicated exactly in the destination 'project' folder, copying all contents except the top 'project' folder. Without the forward slash on the source there would be another 'project' folder within the 'project' folder at the destination.

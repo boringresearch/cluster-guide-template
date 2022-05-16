@@ -1,6 +1,7 @@
 ---
 title: "Private Modules"
 output: html_document
+author: Junfan Huang
 ---
 
 # Using Private Modules

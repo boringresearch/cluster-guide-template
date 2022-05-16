@@ -118,12 +118,12 @@
 <div id="on-campus" class="section level2">
 <h2><span class="header-section-number">1.1</span> On campus</h2>
 <p>Once your account has been created, the clusters can be accessed on campus via a terminal emulator using the <code>ssh</code> command or via a GUI SSH app, such as <a href="https://wiki.x2go.org/doku.php">X2Go</a>. On macOS or Linux the default terminal apps can be used. On Windows the <a href="https://www.putty.org/">PuTTY</a> or X2Go apps can be used. Once a terminal is started, connect to Knot by entering the command</p>
-<pre><code>$ ssh user@knot.cnsi.ucsb.edu</code></pre>
+<pre><code>$ ssh user@eddie.ecdf.ed.ac.uk</code></pre>
 <p>or connect to Pod by entering the command</p>
-<pre><code>$ ssh user@pod.cnsi.ucsb.edu</code></pre>
+<pre><code>$ ssh user@eddie.ecdf.ed.ac.uk</code></pre>
 <p>where <code>user</code> is your server username. You will then be prompted for your password. SSH keys can also be set up to skip password entry.</p>
 <p>To use GUI applications on the server, a slightly different process is needed in order to enter an XWindows environment. On macOS, <a href="https://www.xquartz.org/">XQuartz</a> must be installed. On Windows, use the X2Go app to connect to the server. More info on X2Go can be found at <a href="http://csc.cnsi.ucsb.edu/docs/using-x2go-gui-login-knot-or-pod" class="uri">http://csc.cnsi.ucsb.edu/docs/using-x2go-gui-login-knot-or-pod</a>. To use GUIs, add the <code>-X</code> option to the <code>ssh</code> command, such as</p>
-<pre><code>$ ssh -X user@pod.cnsi.ucsb.edu</code></pre>
+<pre><code>$ ssh -X user@eddie.ecdf.ed.ac.uk</code></pre>
 <p>Once connected, you will interact with the Linux server using the command line interface. The default working directory is your home folder <code>/home/user</code>. Note that this is the login node, but all analyses should be run on compute nodes. These analyses should be submitted as jobs to the queue (more about this <a href="submitting-jobs.html#submitting-jobs">later</a>), which allocates compute nodes among users.</p>
 <p>To disconnect from the cluster, use the command <code>exit</code>.</p>
 </div>

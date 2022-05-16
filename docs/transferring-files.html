@@ -121,9 +121,9 @@
 <p>The generic setup for an scp command is</p>
 <pre><code>$ scp [options] &lt;source&gt; &lt;destination&gt;</code></pre>
 <p>To copy a single file from a local computer to the Pod cluster, the scp command is</p>
-<pre><code>$ scp /path/to/file.txt user@pod.cnsi.ucsb.edu:/home/user</code></pre>
+<pre><code>$ scp /path/to/file.txt user@eddie.ecdf.ed.ac.uk:/home/user</code></pre>
 <p>To copy an entire directory from a local computer to the Pod server cluster, the typical scp command is</p>
-<pre><code>$ scp -r /path/to/project user@pod.cnsi.ucsb.edu:/home/user</code></pre>
+<pre><code>$ scp -r /path/to/project user@eddie.ecdf.ed.ac.uk:/home/user</code></pre>
 <p>where the <code>-r</code> option indicates that files should be transferred recursively, such as subdirectories.</p>
 </div>
 <div id="using-rsync-to-transfer-files" class="section level2">
@@ -132,7 +132,7 @@
 <p>The generic setup for an rsync command is</p>
 <pre><code>$ rsync [options] &lt;source&gt; &lt;destination&gt;</code></pre>
 <p>To transfer an entire directory from a local computer to the Pod cluster, a typical rsync command with commonly used options is</p>
-<pre><code>$ rsync -avzP -e ssh /home/user/project/ user@pod.cnsi.ucsb.edu:/home/user/project</code></pre>
+<pre><code>$ rsync -avzP -e ssh /home/user/project/ user@eddie.ecdf.ed.ac.uk:/home/user/project</code></pre>
 <p>This example represents a push transfer. A pull transfer could also be completed by simply switching the source and destination. When transferring entire directories, a forward slash on the source matters but never for the destination. In this case, the ‘project’ folder has a forward slash and all its contents will be replicated exactly in the destination ‘project’ folder, copying all contents except the top ‘project’ folder. Without the forward slash on the source there would be another ‘project’ folder within the ‘project’ folder at the destination.</p>
 <p>The rsync options can be specified in short or long forms. In this use case, the <code>-a</code> or <code>--archive</code> option completely replicates all folders and files, including recursively through all subdirectories while preserving symbolic links, permissions, and ownership. The <code>-v</code> or <code>--verbose</code> option increases the amount of information that is logged. The <code>-z</code> or <code>--compress</code> option compresses files during transit to reduce transfer time. The <code>-P</code> or <code>--partial --progress</code> option enables partially transferred files to be kept in case of a break or pause and also displays the progress of individual file transfers. The <code>-e ssh</code> option instructs rysnc to transfer files via SSH, used when transferring to or from a server. Many other options exist, but these are the primary ones used. Additionally, add the <code>-n</code> or <code>--dry-run</code> option to test what an rsync command will do without actually transferring files.</p>
 <p>After the command is submitted, you will be prompted for a password if transferring to or from a server. If you use rsync frequently, then you can also set up SSH keys in order to skip password entry.</p>
